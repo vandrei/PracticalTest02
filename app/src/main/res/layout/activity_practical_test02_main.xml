@@ -114,6 +114,7 @@
             android:hint="Value"
             android:layout_row="1"
             android:layout_column="0"
+            />
 
         <Button
             android:id="@+id/get_value_button"
