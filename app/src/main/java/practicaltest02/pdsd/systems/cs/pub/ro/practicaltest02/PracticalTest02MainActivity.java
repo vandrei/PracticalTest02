@@ -113,7 +113,7 @@ public class PracticalTest02MainActivity extends ActionBarActivity {
                                                 HttpGet getRequest = new HttpGet("http://www.timeapi.org/utc/now");
                                                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
                                                 String timeContent = httpClient.execute(getRequest, responseHandler);
-                                                DateFormat df = new SimpleDateFormat("", Locale.ENGLISH);
+                                                DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH);
                                                 if (lastRefreshTime == null) {
                                                     lastRefreshTime = df.parse(timeContent);
                                                 } else {
@@ -152,6 +152,7 @@ public class PracticalTest02MainActivity extends ActionBarActivity {
                                     }
                                 }
                             });
+                            communicationThread.start();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -160,6 +161,7 @@ public class PracticalTest02MainActivity extends ActionBarActivity {
 
                 }
             });
+            serverThread.start();
         } catch (IOException ioException) {
         }
     }
@@ -199,6 +201,8 @@ public class PracticalTest02MainActivity extends ActionBarActivity {
                 }
             }
         });
+
+        requestThread.start();
     }
 
     private void putValue() {
@@ -239,6 +243,8 @@ public class PracticalTest02MainActivity extends ActionBarActivity {
                 }
             }
         });
+
+        requestThread.start();
     }
 
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
